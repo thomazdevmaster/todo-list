@@ -35,6 +35,17 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          env:
+            - name: USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: configmaps
+                  key: USERNAME
+            - name: SECRET_VALUE
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: SECRET_VALUE
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

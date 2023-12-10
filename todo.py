@@ -1,4 +1,6 @@
 from datetime import datetime
+import os
+import base64
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -10,6 +12,17 @@ def generate_unique_id():
     global id
     id += 1
     return id 
+
+@app.route('/', methods=['GET'])
+def home():
+    user_name = os.environ.get('USER_NAME', 'usuário')
+    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')
+
+    decoded_bytes = base64.b64decode(secret_value)
+    decoded_string = decoded_bytes.decode('utf-8')
+
+    return jsonify({"message": f"Olá {user_name}, essa é sua api de tarefas, exemplo de secrets em base64 é {secret_value} e decodificado é ({decoded_string})"})
+
 
 @app.route('/tasks', methods=['GET'])
 def get_tasks():

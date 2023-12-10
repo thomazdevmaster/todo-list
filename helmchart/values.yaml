@@ -100,3 +100,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+secrets:
+  secretValue: "U2VncmVkbw=="
+
+configMaps:
+  username: "thomaz franklin"

@@ -43,6 +43,15 @@
         "documentation": {}
     },
     {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
         "label": "Flask",
         "importPath": "flask",
         "description": "flask",
@@ -152,7 +161,16 @@
         "kind": 2,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "def generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/tasks', methods=['GET'])\ndef get_tasks():\n    return jsonify({'tasks': tasks})\n@app.route('/tasks', methods=['POST'])\ndef add_task():\n    data = request.get_json()",
+        "peekOfCode": "def generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')",
+        "detail": "todo",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "todo",
+        "description": "todo",
+        "peekOfCode": "def home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')\n    return jsonify({\"message\": f\"Olá {user_name}, essa é sua api de tarefas, exemplo de secrets em base64 é {secret_value} e decodificado é ({decoded_string})\"})\n@app.route('/tasks', methods=['GET'])\ndef get_tasks():\n    return jsonify({'tasks': tasks})\n@app.route('/tasks', methods=['POST'])",
         "detail": "todo",
         "documentation": {}
     },
@@ -206,7 +224,7 @@
         "kind": 5,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "app = Flask(__name__)\ntasks = {}\nid = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/tasks', methods=['GET'])\ndef get_tasks():\n    return jsonify({'tasks': tasks})",
+        "peekOfCode": "app = Flask(__name__)\ntasks = {}\nid = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')",
         "detail": "todo",
         "documentation": {}
     },
@@ -215,7 +233,7 @@
         "kind": 5,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "tasks = {}\nid = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/tasks', methods=['GET'])\ndef get_tasks():\n    return jsonify({'tasks': tasks})\n@app.route('/tasks', methods=['POST'])",
+        "peekOfCode": "tasks = {}\nid = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')",
         "detail": "todo",
         "documentation": {}
     },
@@ -224,7 +242,7 @@
         "kind": 5,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "id = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/tasks', methods=['GET'])\ndef get_tasks():\n    return jsonify({'tasks': tasks})\n@app.route('/tasks', methods=['POST'])\ndef add_task():",
+        "peekOfCode": "id = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)",
         "detail": "todo",
         "documentation": {}
     }
