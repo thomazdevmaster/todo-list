@@ -30,7 +30,7 @@ def add_task():
         'completed_at': None
     }
     tasks[id_task] = task
-    return jsonify({'message': 'Task added successfully', "id": id_task})
+    return jsonify({'message': 'Tarefa adicionada cokm sucesso', "id": id_task})
 
 
 
@@ -39,7 +39,7 @@ def get_task(task_id):
     if task_id in tasks:
         return jsonify({'task': tasks[task_id]})
     else:
-        return jsonify({'error': 'Task not found'}), 404
+        return jsonify({'error': 'Tarefa não existe'}), 404
 
 
 
@@ -55,17 +55,17 @@ def update_task(task_id):
 
         tasks[task_id]['updated_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        return jsonify({'message': 'Task updated successfully'})
+        return jsonify({'message': 'Tarefa atualizada com sucesso'})
     else:
-        return jsonify({'error': 'Task not found'}), 404
+        return jsonify({'error': 'Tarefa não existe'}), 404
     
 @app.route('/tasks/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):
     if task_id in tasks:
         del tasks[task_id]
-        return jsonify({'message': 'Task deleted successfully'})
+        return jsonify({'message': 'Tarefa apagada com sucesso'})
     else:
-        return jsonify({'error': 'Task not found'}), 404
+        return jsonify({'error': 'Tarefa não existe'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
