@@ -69,8 +69,8 @@ python todo.py
 ```
 
 | Método | Endpoint          | Parâmetro                                     | retorno                    |
-| ------ | ----------------- | --------------------------------------------- | -------------------------- | --------------------------------------- |
-| GET    | /tasks            | - - -                                         | Lista com todas as tasks   | curl -X GET http://localhost:5000/tasks |
+| ------ | ----------------- | --------------------------------------------- | -------------------------- |
+| GET    | /tasks            | - - -                                         | Lista com todas as tasks   |
 | POST   | /tasks            | body com task apenas com description e status |
 | GET    | /tasks/< id: int> | id da task                                    | Task com id correspondente |
 | PUT    | /tasks/< id: int> | id da task                                    | Mensagem de task alterada  |
