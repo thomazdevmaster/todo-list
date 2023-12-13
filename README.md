@@ -1,14 +1,19 @@
-# Todo-List API com Flask
+# ✔️ Todo-List API com Flask
 
 ## Esta é uma API de todo-list usando o framework Flask em Python, como produto do trabalho final da disciplina de Tópicos em Engenharia de Software 1 do Curso de Mestrado em Engenharia de Software da Universidade Federal de Lavras
 
-- Professor: **Rafael Durelli**
-- Aluno: **Thomaz Franklin de Souza Jorge**
-- Data: **Dezembro de 2023**
+---
+## 🗃️ Table of Contents 🗃️
+[Execução e desenvolvimento](Execução-e-desenvolvimento) | [Docker](Docker) | [Helm Chart](Helm-Chart) | [Alterando o código](Alterando-o-código)
+
+---
+- 👨‍🏫 Professor: **Rafael Durelli**
+- 🧒 Aluno: **Thomaz Franklin de Souza Jorge**
+- 📆 Data: **Dezembro de 2023**
 
 ---
 
-## Execução e desenvolvimento
+## ⚙️ Execução e desenvolvimento
 
 Certifique-se de ter o Python e o pip instalados no seu sistema.
 
@@ -71,6 +76,7 @@ python todo.py
 | PUT    | /tasks/< id: int> | id da task                                    | Mensagem de task alterada  |
 | DELETE | /tasks/< id: int> | id da task                                    | Mensagem de task deletada  |
 
+---
 Exemplos com cURL:
 
 - 1. Buscar todas tasks:
@@ -122,8 +128,9 @@ curl  -X DELETE \
   'localhost:5000/tasks/1' \
   --header 'Accept: */*'
 ```
+---
 
-## Docker
+## 🐳 Docker
 
 1. Dockerfile criado para ambiente de produção
 
@@ -165,7 +172,7 @@ docker build -t thomazfsj/todo_list:latest .
 docker push thomazfsj/todo_list:latest
 ```
 
-## Helm Chart
+## 🚢 Helm Chart
 
 1. Criação do chart
 
@@ -195,7 +202,7 @@ export CONTAINER_PORT=$(kubectl get pod --namespace default $POD_NAME -o jsonpat
 kubectl --namespace default port-forward $POD_NAME 5000:$CONTAINER_PORT
 ```
 
-## Alterando o código:
+## 🧻 Alterando o código:
 
 1. Alteração de todas as mensagens para portugues
 
