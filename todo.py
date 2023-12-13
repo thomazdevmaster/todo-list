@@ -1,17 +1,35 @@
 from datetime import datetime
+import json
 import os
 import base64
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-tasks = {}
-id = 0
+tasks_file_path = 'tasks.json'
+
 
 def generate_unique_id():
-    global id
-    id += 1
-    return id 
+    max_id = max(tasks.keys(), default=0)
+    return str(int(max_id) + 1)
+
+
+def load_tasks_from_file():
+    if os.path.exists(tasks_file_path):
+        with open(tasks_file_path, 'r') as file:
+            try:
+                return json.load(file)
+            except json.decoder.JSONDecodeError:
+                return {}
+    else:
+        return {}
+        
+
+def save_tasks(tasks_data):
+    with open(tasks_file_path, 'w') as file:
+        json.dump(tasks_data, file, indent=2)
+
+tasks = load_tasks_from_file()
 
 @app.route('/', methods=['GET'])
 def home():
@@ -43,14 +61,15 @@ def add_task():
         'completed_at': None
     }
     tasks[id_task] = task
-    return jsonify({'message': 'Tarefa adicionada cokm sucesso', "id": id_task})
+    save_tasks(tasks)
+    return jsonify({'message': 'Tarefa adicionada com sucesso', "id": id_task}), 201
 
 
 
 @app.route('/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
     if task_id in tasks:
-        return jsonify({'task': tasks[task_id]})
+        return jsonify({'task': tasks[task_id]}), 200
     else:
         return jsonify({'error': 'Tarefa não existe'}), 404
 
@@ -68,7 +87,8 @@ def update_task(task_id):
 
         tasks[task_id]['updated_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        return jsonify({'message': 'Tarefa atualizada com sucesso'})
+        save_tasks(tasks)
+        return jsonify({'message': 'Tarefa atualizada com sucesso'}), 200
     else:
         return jsonify({'error': 'Tarefa não existe'}), 404
     
@@ -76,6 +96,7 @@ def update_task(task_id):
 def delete_task(task_id):
     if task_id in tasks:
         del tasks[task_id]
+        save_tasks(tasks)
         return jsonify({'message': 'Tarefa apagada com sucesso'})
     else:
         return jsonify({'error': 'Tarefa não existe'}), 404

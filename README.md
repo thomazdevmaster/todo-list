@@ -216,3 +216,6 @@ docker push thomazfsj/todo_list:latest
 ```sh
 helm upgrade todo helmchart --install
 ```
+
+5. Verificando utilização de secrets e config map
+- Basta definir os valores no arquivo value e verificar acessando a aplicação na raíz

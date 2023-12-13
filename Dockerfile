@@ -22,6 +22,6 @@ RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /
 USER appuser
 
 # Subindo aplicação
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "todo:app"]
+CMD ["gunicorn", "-w 4", "--bind", "0.0.0.0:5000", "todo:app"]
 
 EXPOSE 5000

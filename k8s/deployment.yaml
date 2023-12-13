@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo
+  labels:
+    app: todo
+spec:
+  selector:
+    matchLabels:
+      app: todo
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: todo
+    spec:
+      containers:
+        - name: todo
+          image: thomazfsj/todo_list:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          envFrom:
+            - configMapRef:
+                name: configmaps
+            - secretRef:
+                name: secrets
+          ports:
+            - containerPort: 5000
+              name: todo
+      restartPolicy: Always

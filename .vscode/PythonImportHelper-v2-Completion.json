@@ -43,6 +43,15 @@
         "documentation": {}
     },
     {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
         "label": "base64",
         "kind": 6,
         "isExtraImport": true,
@@ -161,7 +170,25 @@
         "kind": 2,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "def generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')",
+        "peekOfCode": "def generate_unique_id():\n    max_id = max(tasks.keys(), default=0)\n    return str(int(max_id) + 1)\ndef load_tasks_from_file():\n    if os.path.exists(tasks_file_path):\n        with open(tasks_file_path, 'r') as file:\n            try:\n                return json.load(file)\n            except json.decoder.JSONDecodeError:\n                return {}",
+        "detail": "todo",
+        "documentation": {}
+    },
+    {
+        "label": "load_tasks_from_file",
+        "kind": 2,
+        "importPath": "todo",
+        "description": "todo",
+        "peekOfCode": "def load_tasks_from_file():\n    if os.path.exists(tasks_file_path):\n        with open(tasks_file_path, 'r') as file:\n            try:\n                return json.load(file)\n            except json.decoder.JSONDecodeError:\n                return {}\n    else:\n        return {}\ndef save_tasks(tasks_data):",
+        "detail": "todo",
+        "documentation": {}
+    },
+    {
+        "label": "save_tasks",
+        "kind": 2,
+        "importPath": "todo",
+        "description": "todo",
+        "peekOfCode": "def save_tasks(tasks_data):\n    with open(tasks_file_path, 'w') as file:\n        json.dump(tasks_data, file, indent=2)\ntasks = load_tasks_from_file()\n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')",
         "detail": "todo",
         "documentation": {}
     },
@@ -197,7 +224,7 @@
         "kind": 2,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "def get_task(task_id):\n    if task_id in tasks:\n        return jsonify({'task': tasks[task_id]})\n    else:\n        return jsonify({'error': 'Tarefa não existe'}), 404\n@app.route('/tasks/<int:task_id>', methods=['PUT'])\ndef update_task(task_id):\n    if task_id in tasks:\n        data = request.get_json()\n        data['id'] = tasks[task_id]['id']",
+        "peekOfCode": "def get_task(task_id):\n    if task_id in tasks:\n        return jsonify({'task': tasks[task_id]}), 200\n    else:\n        return jsonify({'error': 'Tarefa não existe'}), 404\n@app.route('/tasks/<int:task_id>', methods=['PUT'])\ndef update_task(task_id):\n    if task_id in tasks:\n        data = request.get_json()\n        data['id'] = tasks[task_id]['id']",
         "detail": "todo",
         "documentation": {}
     },
@@ -206,7 +233,7 @@
         "kind": 2,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "def update_task(task_id):\n    if task_id in tasks:\n        data = request.get_json()\n        data['id'] = tasks[task_id]['id']\n        data['created_at'] = tasks[task_id]['created_at']\n        tasks[task_id]['description'] = data.get('description')\n        tasks[task_id]['updated_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')\n        return jsonify({'message': 'Tarefa atualizada com sucesso'})\n    else:\n        return jsonify({'error': 'Tarefa não existe'}), 404",
+        "peekOfCode": "def update_task(task_id):\n    if task_id in tasks:\n        data = request.get_json()\n        data['id'] = tasks[task_id]['id']\n        data['created_at'] = tasks[task_id]['created_at']\n        tasks[task_id]['description'] = data.get('description')\n        tasks[task_id]['updated_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')\n        save_tasks(tasks)\n        return jsonify({'message': 'Tarefa atualizada com sucesso'}), 200\n    else:",
         "detail": "todo",
         "documentation": {}
     },
@@ -215,7 +242,7 @@
         "kind": 2,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "def delete_task(task_id):\n    if task_id in tasks:\n        del tasks[task_id]\n        return jsonify({'message': 'Tarefa apagada com sucesso'})\n    else:\n        return jsonify({'error': 'Tarefa não existe'}), 404\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "peekOfCode": "def delete_task(task_id):\n    if task_id in tasks:\n        del tasks[task_id]\n        save_tasks(tasks)\n        return jsonify({'message': 'Tarefa apagada com sucesso'})\n    else:\n        return jsonify({'error': 'Tarefa não existe'}), 404\nif __name__ == '__main__':\n    app.run(debug=True)",
         "detail": "todo",
         "documentation": {}
     },
@@ -224,7 +251,16 @@
         "kind": 5,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "app = Flask(__name__)\ntasks = {}\nid = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')",
+        "peekOfCode": "app = Flask(__name__)\ntasks_file_path = 'tasks.json'\ndef generate_unique_id():\n    max_id = max(tasks.keys(), default=0)\n    return str(int(max_id) + 1)\ndef load_tasks_from_file():\n    if os.path.exists(tasks_file_path):\n        with open(tasks_file_path, 'r') as file:\n            try:\n                return json.load(file)",
+        "detail": "todo",
+        "documentation": {}
+    },
+    {
+        "label": "tasks_file_path",
+        "kind": 5,
+        "importPath": "todo",
+        "description": "todo",
+        "peekOfCode": "tasks_file_path = 'tasks.json'\ndef generate_unique_id():\n    max_id = max(tasks.keys(), default=0)\n    return str(int(max_id) + 1)\ndef load_tasks_from_file():\n    if os.path.exists(tasks_file_path):\n        with open(tasks_file_path, 'r') as file:\n            try:\n                return json.load(file)\n            except json.decoder.JSONDecodeError:",
         "detail": "todo",
         "documentation": {}
     },
@@ -233,16 +269,7 @@
         "kind": 5,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "tasks = {}\nid = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')",
-        "detail": "todo",
-        "documentation": {}
-    },
-    {
-        "label": "id",
-        "kind": 5,
-        "importPath": "todo",
-        "description": "todo",
-        "peekOfCode": "id = 0\ndef generate_unique_id():\n    global id\n    id += 1\n    return id \n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)",
+        "peekOfCode": "tasks = load_tasks_from_file()\n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')\n    return jsonify({\"message\": f\"Olá {user_name}, essa é sua api de tarefas, exemplo de secrets em base64 é {secret_value} e decodificado é ({decoded_string})\"})\n@app.route('/tasks', methods=['GET'])\ndef get_tasks():",
         "detail": "todo",
         "documentation": {}
     }

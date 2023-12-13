@@ -16,19 +16,20 @@ spec:
     spec:
       containers:
         - name: {{ .Values.nameOverride }}
-          image: {{ .Values.image.repository}}:{{ .Values.image.tag}}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           resources:
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: "200m"
-              memory: "256Mi"
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           envFrom:
             - configMapRef:
                 name: {{ .Values.configMaps.name }}
-            - secretKeyRef:
+            - secretRef:
                 name: {{ .Values.secrets.name }}
           ports:
             - containerPort: {{ .Values.service.port }}
-              name: {{ .Values.secrets.name }}
+              name: {{ .Values.nameOverride }}
+      restartPolicy: {{ .Values.restartPolicy | default "Always" }}
