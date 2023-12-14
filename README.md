@@ -1,13 +1,14 @@
-# ✔️ Todo-List API com Flask
+# ![image](https://github.com/thomazdevmaster/todo-list/assets/56375981/16cc5c03-d8a4-49ad-b953-58a8cc0d6ffc) Todo-List API com Flask ![neckbeard](https://github.com/thomazdevmaster/todo-list/assets/56375981/59e6ba2b-a5bf-46ff-bb38-5f7baa5fa272)
 
 ## Esta é uma API de todo-list usando o framework Flask em Python, como produto do trabalho final da disciplina de Tópicos em Engenharia de Software 1 do Curso de Mestrado em Engenharia de Software da Universidade Federal de Lavras
+
 
 ---
 ## 🗃️ Table of Contents 🗃️
 | [Execução e desenvolvimento](#%EF%B8%8F-execução-e-desenvolvimento) | [Docker](#-Docker) | [Helm Chart](#-Helm-Chart) | [Alterando o código](#-Alterando-o-código) | [Vídeos apresentação](https://loom.com/share/folder/5ecfef480e1440a7a8ab9b2aa30abdf7) |
 
 ---
-- 👨‍🏫 Professor: **Rafael Durelli**
+- 👨‍🏫 professor: **Rafael Durelli**
 - 🧒 Aluno: **Thomaz Franklin de Souza Jorge**
 - 📆 Data: **Dezembro de 2023**
 
