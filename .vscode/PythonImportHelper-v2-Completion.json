@@ -188,7 +188,7 @@
         "kind": 2,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "def save_tasks(tasks_data):\n    with open(tasks_file_path, 'w') as file:\n        json.dump(tasks_data, file, indent=2)\ntasks = load_tasks_from_file()\n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')",
+        "peekOfCode": "def save_tasks(tasks_data):\n    with open(tasks_file_path, 'w') as file:\n        json.dump(tasks_data, file, indent=2)\ntasks = {}\n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')",
         "detail": "todo",
         "documentation": {}
     },
@@ -269,7 +269,7 @@
         "kind": 5,
         "importPath": "todo",
         "description": "todo",
-        "peekOfCode": "tasks = load_tasks_from_file()\n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')\n    return jsonify({\"message\": f\"Olá {user_name}, essa é sua api de tarefas, exemplo de secrets em base64 é {secret_value} e decodificado é ({decoded_string})\"})\n@app.route('/tasks', methods=['GET'])\ndef get_tasks():",
+        "peekOfCode": "tasks = {}\n@app.route('/', methods=['GET'])\ndef home():\n    user_name = os.environ.get('USER_NAME', 'usuário')\n    secret_value = os.environ.get('SECRET_VALUE', 'TsOjbyBmb2kgaW5mb3JtYWRv')\n    decoded_bytes = base64.b64decode(secret_value)\n    decoded_string = decoded_bytes.decode('utf-8')\n    return jsonify({\"message\": f\"Olá {user_name}, essa é sua api de tarefas, exemplo de secrets em base64 é {secret_value} e decodificado é ({decoded_string})\"})\n@app.route('/tasks', methods=['GET'])\ndef get_tasks():",
         "detail": "todo",
         "documentation": {}
     }

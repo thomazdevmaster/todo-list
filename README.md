@@ -13,6 +13,10 @@
 
 ---
 
+## Vídeos apresentação
+
+[![Clique para ver as apresentações](image.png)](https://loom.com/share/folder/5ecfef480e1440a7a8ab9b2aa30abdf7)
+
 ## ⚙️ Execução e desenvolvimento
 
 Certifique-se de ter o Python e o pip instalados no seu sistema.

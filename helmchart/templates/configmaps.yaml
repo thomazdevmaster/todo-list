@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Values.configMaps.name }}
-data:
-  USER_NAME: {{ .Values.configMaps.username }}

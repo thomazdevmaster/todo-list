@@ -29,7 +29,7 @@ def save_tasks(tasks_data):
     with open(tasks_file_path, 'w') as file:
         json.dump(tasks_data, file, indent=2)
 
-tasks = load_tasks_from_file()
+tasks = {}
 
 @app.route('/', methods=['GET'])
 def home():
@@ -62,7 +62,7 @@ def add_task():
     }
     tasks[id_task] = task
     save_tasks(tasks)
-    return jsonify({'message': 'Tarefa adicionada com sucesso', "id": id_task}), 201
+    return jsonify({'message': 'Sua Tarefa foi adicionada com sucesso', "id": id_task}), 201
 
 
 
