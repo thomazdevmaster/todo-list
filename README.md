@@ -4,7 +4,7 @@
 
 ---
 ## 🗃️ Table of Contents 🗃️
-[Execução e desenvolvimento](#%EF%B8%8F-execução-e-desenvolvimento) | [Docker](#-Docker) | [Helm Chart](#-Helm-Chart) | [Alterando o código](#-Alterando-o-código)
+| [Execução e desenvolvimento](#%EF%B8%8F-execução-e-desenvolvimento) | [Docker](#-Docker) | [Helm Chart](#-Helm-Chart) | [Alterando o código](#-Alterando-o-código) | [Vídeos apresentação](https://loom.com/share/folder/5ecfef480e1440a7a8ab9b2aa30abdf7) |
 
 ---
 - 👨‍🏫 Professor: **Rafael Durelli**
